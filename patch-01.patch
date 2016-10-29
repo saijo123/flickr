@@ -1,0 +1,64 @@
+diff --git a/uploadr.ini b/uploadr.ini
+index da0bf6f..3e9c6ea 100644
+--- a/uploadr.ini
++++ b/uploadr.ini
+@@ -2,7 +2,7 @@
+ ################################################################################
+ # Location to scan for new files
+ ################################################################################
+-FILES_DIR = "YourDir"
++FILES_DIR = "/mnt/Photos"
+ 
+ ################################################################################
+ #   Flickr settings
+@@ -17,8 +17,8 @@ FLICKR = {
+         "is_public"             : "0",
+         "is_friend"             : "0",
+         "is_family"             : "0",
+-        "api_key"               : "YourKey",
+-        "secret"                : "YourSecret"
++        "api_key"               : "TODO",
++        "secret"                : "TODO"
+         }
+ 
+ ################################################################################
+@@ -61,7 +61,7 @@ IGNORED_REGEX = []
+ ################################################################################
+ #   List of file extensions you agree to upload
+ ################################################################################
+-ALLOWED_EXT = ["jpg","png","avi","mov","mpg","mp4","3gp"]
++ALLOWED_EXT = ["jpg","png","avi","mov","mpg","mp4","3gp","MOV"]
+ 
+ ################################################################################
+ #   RAW File Conversion (optional)
+@@ -73,7 +73,7 @@ RAW_TOOL_PATH = "/volume1/photo/Image-ExifTool-9.69/"
+ ################################################################################
+ #   Files greater than this value won't be uploaded (1Mo = 1000000)
+ ################################################################################
+-FILE_MAX_SIZE = 50000000
++FILE_MAX_SIZE = 5000000000
+ 
+ ################################################################################
+ #   Do you want to verify each time if already uploaded files have been changed?
+diff --git a/uploadr.py b/uploadr.py
+old mode 100644
+new mode 100755
+index 607c1d1..d4c0cb7
+--- a/uploadr.py
++++ b/uploadr.py
+@@ -1120,13 +1120,13 @@ if __name__ == "__main__":
+     else:
+         if not flick.checkToken():
+             flick.authenticate()
+-        # flick.displaySets()
++        flick.displaySets()
+ 
+         flick.removeUselessSetsTable()
+         flick.getFlickrSets()
+         flick.convertRawFiles()
+         flick.upload()
+-        flick.removeDeletedMedia()
++        #flick.removeDeletedMedia()
+         flick.createSets()
+         flick.print_stat()
+ 
